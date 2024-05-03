@@ -19,7 +19,7 @@ function handleNavigateToHome() {
 
 <template>
   <div v-if="selectedBook" class="container">
-    <h1>
+    <h1 data-testid="title">
       {{ selectedBook.title }}<br />
       <small>{{ selectedBook.subtitle }}</small>
     </h1>
@@ -32,14 +32,14 @@ function handleNavigateToHome() {
 
         <h4>Details</h4>
         <ul>
-          <li><strong>Author:</strong>{{ selectedBook.author }}</li>
-          <li><strong>Publisher:</strong> {{ selectedBook.publisher }}</li>
+          <li data-testid="author"><strong>Author:</strong>{{ selectedBook.author }}</li>
+          <li data-testid="publisher"><strong>Publisher:</strong> {{ selectedBook.publisher }}</li>
           <li><strong>Pages:</strong> {{ selectedBook.numPages }}</li>
         </ul>
 
-          <button class="button button-outline" @click="handleNavigateToHome">
-            Back
-          </button>
+        <button data-testid="back-btn" class="button button-outline" @click="handleNavigateToHome">
+          Back
+        </button>
       </div>
       <div class="column column-33">
         <img :src="`${BaseURL}covers/${selectedBook.isbn}.png`" alt="" />

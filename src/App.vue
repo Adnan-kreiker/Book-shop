@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import AppNavigation from '@/components/AppNavigation.vue'
+import { useBooksStore } from '@/stores/books'
+import { storeToRefs } from 'pinia';
+
+const bookStore = useBooksStore()
+
+const { favoriteBooks } = storeToRefs(bookStore)
 </script>
 
 <template>
@@ -12,7 +18,7 @@ import AppNavigation from '@/components/AppNavigation.vue'
             <p class="logo">IT.Book.Library</p>
           </div>
           <div class="column">
-            <AppNavigation />
+            <AppNavigation :favorite-books />
           </div>
         </div>
       </div>

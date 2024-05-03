@@ -41,10 +41,10 @@ const emits = defineEmits<{
             </svg>
           </button>
         </td>
-        <td>{{ book.title }}</td>
-        <td>{{ book.isbn }}</td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.publisher }}</td>
+        <td data-testid="book-title">{{ book.title }}</td>
+        <td data-testid="book-isbn">{{ book.isbn }}</td>
+        <td data-testid="book-author">{{ book.author }}</td>
+        <td data-testid="book-publisher">{{ book.publisher }}</td>
         <td>
           <button data-testid="details-btn" class="button" @click="emits('navigateToDetail', book.isbn)">
             Detail
