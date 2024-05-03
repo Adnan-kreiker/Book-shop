@@ -50,24 +50,24 @@ export const useBookStore = defineStore('books', () => {
 
   const searchByBookTitle = ref('')
 
+  const selectedPublisher = ref('-')
+
   const filteredBooks = computed(() => {
-    if(!searchByBookTitle.value) return books.value
+    if(!searchByBookTitle.value && selectedPublisher.value == '-') return books.value
 
     const result = books.value.filter((book) => {
       return book.title.toLowerCase().includes(searchByBookTitle.value.toLowerCase())
     })
 
-    if(!selectedPublisher.value) return result
+    if(selectedPublisher.value == '-') return result
 
     return result.filter((book) => book.publisher === selectedPublisher.value)
   })
 
-  const selectedPublisher = ref('')
-
   const bookPublishers = computed(() => {
     if(!books.value.length) return []
 
-    return new Set(books.value.map((book) => book.publisher))
+    return [...new Set(books.value.map((book) => book.publisher))]
   })
 
   return {
