@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import type { Book } from '@/stores/books';
+import type { BookWithFavorite } from '@/stores/books';
 
 const props = defineProps<{
-  books: Book[]
+  books: BookWithFavorite[]
   isLoading: boolean
 }>()
 
 const emits = defineEmits<{
   (event: 'toggleFavorite', id: string): void
+  (event: 'navigateToDetail', id: string): void
 }>()
 </script>
 
 <template>
-  <table v-if="!props.isLoading">
+  <table v-if="!props.isLoading && props.books.length">
     <thead>
       <tr>
         <th class="first-col">&nbsp;</th>
@@ -26,7 +27,7 @@ const emits = defineEmits<{
     <tbody>
       <tr v-for="book in books" :key="book.id">
         <td>
-          <button @click="emits('toggleFavorite', book.id)" class="button button-clear fav-btn">
+          <button @click="emits('toggleFavorite', book.isbn)" class="button button-clear fav-btn">
             <svg v-if="book.isFavorite" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="fav">
               <path
@@ -44,11 +45,20 @@ const emits = defineEmits<{
         <td>{{ book.author }}</td>
         <td>{{ book.publisher }}</td>
         <td>
-          <button class="button" onclick="location.href='detail.html'">
+          <button class="button" @click="emits('navigateToDetail', book.isbn)">
             Detail
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  <p v-else class="empty-state">No books found!</p>
 </template>
+
+<style scoped>
+.empty-state {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #666;
+}
+</style>
