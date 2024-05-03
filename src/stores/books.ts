@@ -63,7 +63,6 @@ export const useBooksStore = defineStore('books', () => {
 
   function toggleFavorite(isbn: string) {
     const favoritesFromLocalStorage = JSON.parse(localStorage.getItem('favorites') ?? '[]') as string[]
-    console.log(favoritesFromLocalStorage);
     const index = favoritesFromLocalStorage.indexOf(isbn)
 
     if (index === -1) {
