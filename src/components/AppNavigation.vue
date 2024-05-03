@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { useBooksStore } from '@/stores/books'
-import { storeToRefs } from 'pinia';
+import type { BookWithFavorite } from '@/stores/books';
 
-const bookStore = useBooksStore()
-
-const { favoriteBooks } = storeToRefs(bookStore)
+const props = defineProps<{
+  favoriteBooks: BookWithFavorite[]
+}>()
 </script>
 
 <template>
   <nav class="mainnav">
-    <RouterLink to="/" class="mainnav-link" exact-active-class="mainnav-link--active">Books</RouterLink>
-    <RouterLink to="/favorites" class="mainnav-link" exact-active-class="mainnav-link--active">Favorites <span
-        class="mainnav-number">{{ favoriteBooks.length
+    <RouterLink data-testid="home-link" to="/" class="mainnav-link" exact-active-class="mainnav-link--active">Books
+    </RouterLink>
+    <RouterLink data-testid="favorites-link" to="/favorites" class="mainnav-link"
+      exact-active-class="mainnav-link--active">
+      Favorites <span class="mainnav-number">{{ props.favoriteBooks.length
         }}</span></RouterLink>
   </nav>
 </template>
