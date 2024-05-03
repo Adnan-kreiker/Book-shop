@@ -4,8 +4,8 @@ import { storeToRefs } from 'pinia';
 import BooksTable from '@/components/BooksTable.vue';
 import BooksSearch from '@/components/BooksSearch.vue';
 import BooksFilter from '@/components/BooksFilter.vue';
-import { useRouter } from 'vue-router';
-import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { computed, watch } from 'vue';
 
 const bookStore = useBooksStore()
 
@@ -43,6 +43,12 @@ const pageHeaderText = computed(() => {
 
 const isFavoritePage = computed(() => router.currentRoute.value.name === 'favorites')
 
+const route = useRoute()
+
+watch(() => route.name, () => {
+  bookStore.selectedPublisher = '-'
+  bookStore.searchByBookTitle = ''
+})
 </script>
 
 <template>
