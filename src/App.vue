@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import AppNavigation from '@/components/AppNavigation.vue'
 </script>
 
 <template>
@@ -7,16 +8,11 @@ import { RouterLink, RouterView } from 'vue-router'
     <header class="header">
       <div class="container">
         <div class="row">
-          <div class="column"><p class="logo">IT.Book.Library</p></div>
           <div class="column">
-            <nav class="mainnav">
-              <a href="index.html" class="mainnav-link mainnav-link--active"
-                >Books</a
-              >
-              <a href="favorite.html" class="mainnav-link"
-                >Favorites <span class="mainnav-number">2</span></a
-              >
-            </nav>
+            <p class="logo">IT.Book.Library</p>
+          </div>
+          <div class="column">
+            <AppNavigation />
           </div>
         </div>
       </div>
